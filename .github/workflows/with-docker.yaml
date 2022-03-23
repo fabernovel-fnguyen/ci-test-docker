@@ -9,7 +9,7 @@ jobs:
   job1:
     uses: ./.github/workflows/scan-conf-files.yaml
     with:
-      directory: ./ci/heart/config
+      directory: ci/heart/config
 
   # job2:
   #   id: job2
