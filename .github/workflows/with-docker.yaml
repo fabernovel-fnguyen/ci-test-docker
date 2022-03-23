@@ -33,7 +33,7 @@ jobs:
           path: ~/.cache
           key: heart
       - name: Load Heart image from cache
-        run: docker load -i ~/.cache/heart.tar.gz
+        run: docker load -i ~/cache/heart.tar.gz
       - name: Establish current file name from configuration path
         id: conf-dir-and-file-name
         run: |

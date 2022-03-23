@@ -8,6 +8,9 @@ on:
         required: false
         type: string
         default: ./ci/heart/config
+    outputs:
+      description: "List of found configuration files in JSON format"
+      value: ${{ jobs.step2.outputs.files }}
 
 jobs:
   scan-conf-files:
@@ -23,3 +26,5 @@ jobs:
         working-directory: ${{ inputs.directory }}
         run: |
           echo "::set-output name=files::$(find . -name "*.json" | jq -R -s -c 'split("\n")[:-1]')"
+        outputs:
+          files: ${{ steps.step2.outputs.files }}
