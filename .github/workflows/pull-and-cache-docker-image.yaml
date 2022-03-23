@@ -34,4 +34,4 @@ jobs:
         run: |
           docker pull ghcr.io/fabernovel-fnguyen/heart:latest
       - name: Cache Heart Docker image as .tar file
-        run: docker save ${{ secrets.image-name }} | gzip > ~/.cache/${secrets.image-name}.tar.gz
+        run: docker save ${{ secrets.image-name }} | gzip > ~/.cache/heart.tar.gz
