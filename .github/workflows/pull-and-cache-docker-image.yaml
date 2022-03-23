@@ -37,7 +37,9 @@ jobs:
           path: ~/.cache
           key: heart
       - name: Pull Heart docker image
-        run: docker pull ghcr.io/fabernovel-fnguyen/heart:latest
+        run: |
+          echo ${{ secrets.password }} | docker login ${{ secrets.registry }} -u ${{ secrets.username }} --password-stdin
+          docker pull ghcr.io/fabernovel-fnguyen/heart:latest
         # ${{ secrets.image-name }}
       - name: Cache Heart Docker image as .tar file
         run: docker save ${{ secrets.image-name }} | gzip > ~/.cache/${inputs.image-name}.tar.gz
