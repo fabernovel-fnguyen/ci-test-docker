@@ -2,45 +2,41 @@ name: Run Heart analysis using Heart Docker image
 on:
   push
 
-env:
-  HEART_DOCKER_IMAGE: ghcr.io/fabernovel-fnguyen/heart:latest
-
 jobs: 
-  job1:
+  scan:
     uses: ./.github/workflows/scan-conf-files.yaml
     with:
-      directory: ./ci/heart/config/
+      directory: ./ci/heart/config
 
-  # job2:
-  #   id: job2
-  #   uses: ./.github/workflows/pull-and-cache-docker-image.yaml    
-  #   with:
-  #     image-name: $HEART_DOCKER_IMAGE
-  #     username: $github.actor
-  #     password: $secrets.GITHUB_TOKEN
+  pull-image:
+    uses: ./.github/workflows/pull-and-cache-docker-image.yaml    
+    with:
+      image-name: $secrets.HEART_DOCKER_IMAGE
+      username: $github.actor
+      password: $secrets.GITHUB_TOKEN
 
 
-  # analysis:
-  #   runs-on: ubuntu-latest
-  #   needs: [scan-conf-files, cache-heart-image]
+  analysis:
+    runs-on: ubuntu-latest
+    needs: [scan, pull-image]
 
-  #   strategy:
-  #     matrix:
-  #       conf-file-name: ${{ fromJson(needs.scan-conf-files.outputs.file) }}
+    strategy:
+      matrix:
+        conf-file-name: ${{ fromJson(needs.scan.outputs.files) }}
     
-  #   steps:
-  #     - name: Check out the repo
-  #       uses: actions/checkout@v2
-  #     - name: Cache Docker image (as tar.gz)
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ~/.cache
-  #         key: heart
-  #     - name: Load Heart image from cache
-  #       run: docker load -i ~/.cache/heart_latest.tar.gz
-  #     - name: Establish current file name from configuration path
-  #       id: conf-dir-and-file-name
-  #       run: |
-  #         echo '::set-output name=value::$(var=${{ matrix.conf-file-name }} && cut -d'/' -f5- <<< "$var")'
-  #     - name: Run Heart analysis
-  #       run: docker run --rm -i ghcr.io/fabernovel-fnguyen/heart:latest --help
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Cache Docker image (as tar.gz)
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache
+          key: heart
+      - name: Load Heart image from cache
+        run: docker load -i ~/.cache/heart_latest.tar.gz
+      - name: Establish current file name from configuration path
+        id: conf-dir-and-file-name
+        run: |
+          echo '::set-output name=value::$(var=${{ matrix.conf-file-name }} && cut -d'/' -f5- <<< "$var")'
+      - name: Run Heart analysis
+        run: docker run --rm -i ghcr.io/fabernovel-fnguyen/heart:latest --help
