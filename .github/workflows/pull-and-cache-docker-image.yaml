@@ -2,6 +2,10 @@ name: Pull Heart Docker Image and Cache as tar.gz File
 
 on:
   workflow_call:
+    inputs:
+      cache-directory:
+        required: true
+        type: string
     secrets:
       username:
         description: username to login to docker container registry
@@ -29,17 +33,17 @@ jobs:
         id: cache
         uses: actions/cache@v2
         with:
-          path: ~/cache
+          path: ~${{ inputs.cache-directory }}
           key: heart
       - name: Create cache folder if not already present
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd ~
-          mkdir cache
+          mkdir ${{ inputs.cache-directory }}
       - name: Pull Heart docker image
         run: |
-          docker pull ghcr.io/fabernovel-fnguyen/heart:latest
+          docker pull ${{ secrets.image-name }}
       - name: Cache Heart Docker image as .tar file
         run: |
-          cd ~/cache
-          docker save ${{ secrets.image-name }} | gzip > ~/cache/heart.tar.gz
+          cd ~${{ inputs.cache-directory }}
+          docker save ${{ secrets.image-name }} | gzip > ~${{ inputs.cache-directory }}/heart.tar.gz

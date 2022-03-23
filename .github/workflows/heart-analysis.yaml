@@ -1,0 +1,36 @@
+name: Run Heart Analysis
+
+on:
+  workflow_call:
+    inputs:
+    secrets:
+      image-name:
+        description: name of the docker image
+        required: true
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      -
+        id: rm-api
+        if: 
+      -
+        id: rm-dareboost
+        if: 
+      -
+        id: rm-lighthouse
+        if:
+      -
+        id: rm-observatory
+        if: 
+      -
+        id: rm-bigquery
+        if: 
+      -
+        id: rm-slack
+        if: 
+      - 
+        id: run-heart
+        run: docker run --rm -i ${{ secrets.image-name }} --help

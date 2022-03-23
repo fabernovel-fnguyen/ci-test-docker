@@ -25,7 +25,7 @@ if [ -v $USE_LIGHTHOUSE ];
 fi
 
 if [ -v $USE_OBSERVATORY ];
-    then yarn run rm-lighthouse
+    then yarn run rm-observatory
     else echo "Mozilla Observatory module will be used..."
 fi
 
@@ -37,13 +37,13 @@ fi
 # HEART LISTENER MODULES
 
 if [ -v $USE_SLACK ];
-    then yarn run rm-salck
-    else echo "Google Lighthouse module will be used..."
+    then yarn run rm-slack
+    else echo "Slack module will be used..."
 fi
 
 if [ -v $USE_BIGQUERY ];
     then yarn run rm-bigquery
-    else echo "Google Lighthouse module will be used..."
+    else echo "Google BigQuery module will be used..."
 fi
 
 

@@ -4,13 +4,15 @@ on:
 
 jobs: 
 
-  scan:
+  scan-lighthouse:
     uses: ./.github/workflows/scan-conf-files.yaml
     with:
-      directory: "./ci/heart/config/dareboost" # optional
+      directory: "./ci/heart/config" # optional
 
   pull-image:
-    uses: ./.github/workflows/pull-and-cache-docker-image.yaml    
+    uses: ./.github/workflows/pull-and-cache-docker-image.yaml
+    with:
+      cache-directory: /cache    
     secrets: 
       image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
       registry: ${{ secrets.CONTAINER_REGISTRY_NAME }}
@@ -36,9 +38,14 @@ jobs:
           key: heart
       - name: Load Heart image from cache
         run: docker load -i ~/cache/heart.tar.gz
-      - name: Establish current file name from configuration path
-        id: conf-dir-and-file-name
+      - 
         run: |
-          echo '::set-output name=value::$(var=${{ matrix.conf-file-name }} && cut -d'/' -f5- <<< "$var")'
+          echo ${{ matrix.conf-file-name }}
+      # - name: Retrieve module name from configuration file full path
+      #   run: |
       - name: Run Heart analysis
-        run: docker run --rm -i ghcr.io/fabernovel-fnguyen/heart:latest --help
+        uses: ./github/workflows/heart-analysis.yaml
+        with:
+
+        secrets:
+          image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
