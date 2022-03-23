@@ -6,6 +6,8 @@ jobs:
 
   scan:
     uses: ./.github/workflows/scan-conf-files.yaml
+    with:
+      directory: "./ci/heart/config/dareboost"
 
   pull-image:
     uses: ./.github/workflows/pull-and-cache-docker-image.yaml    
