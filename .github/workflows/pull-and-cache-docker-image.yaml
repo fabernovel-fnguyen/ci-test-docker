@@ -36,4 +36,5 @@ jobs:
       - name: Cache Heart Docker image as .tar file
         run: |
           cd ~
+          mkdir cache
           docker save ${{ secrets.image-name }} | gzip > ~/cache/heart.tar.gz
