@@ -4,12 +4,12 @@ on:
   workflow_call:
     inputs:
       directory:
-        description: "Heart configuration directory"
+        description: Heart configuration directory
         required: false
         type: string
         default: ./ci/heart/config
     outputs:
-      description: "List of found configuration files in JSON format"
+      # description: List of found configuration files in JSON format
       value: ${{ jobs.step2.outputs.files }}
 
 jobs:
