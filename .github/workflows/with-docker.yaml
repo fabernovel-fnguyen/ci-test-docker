@@ -5,16 +5,14 @@ on:
 jobs: 
   scan:
     uses: ./.github/workflows/scan-conf-files.yaml
-    with:
-      directory: ./ci/heart/config
 
   pull-image:
     uses: ./.github/workflows/pull-and-cache-docker-image.yaml    
     with:
-      image-name: $secrets.HEART_IMAGE_FULL_NAME
-      registry: $secrets.CONTAINER_REGISTRY_NAME
-      username: $github.actor
-      password: $secrets.GITHUB_TOKEN
+      image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
+      registry: ${{ secrets.CONTAINER_REGISTRY_NAME }}
+      username: ${{ github.actor }}
+      password: ${{ secrets.GITHUB_TOKEN }}
 
 
   analysis:

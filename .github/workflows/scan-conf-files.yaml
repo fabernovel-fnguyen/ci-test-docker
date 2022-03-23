@@ -7,6 +7,7 @@ on:
         description: "Heart configuration directory"
         required: true
         type: string
+        default: ./ci/heart/config
     # outputs:
     #   files: ${{ jobs.scan-conf-files.step2.outputs.files }}
 
