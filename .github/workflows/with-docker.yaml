@@ -2,9 +2,6 @@ name: Run Heart analysis using Heart Docker image
 on:
   push
 
-env:
-  secrets: ${{ secrets }}
-  
 jobs: 
   scan:
     uses: ./.github/workflows/scan-conf-files.yaml
@@ -12,9 +9,10 @@ jobs:
   pull-image:
     uses: ./.github/workflows/pull-and-cache-docker-image.yaml    
     with:
+      username: ${{ github.actor }}
+    secrets: 
       image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
       registry: ${{ secrets.CONTAINER_REGISTRY_NAME }}
-      username: ${{ github.actor }}
       password: ${{ secrets.GITHUB_TOKEN }}
 
 
