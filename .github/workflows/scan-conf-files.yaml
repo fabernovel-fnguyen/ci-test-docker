@@ -21,8 +21,8 @@ jobs:
       - name: Checkout
         id: step1
         uses: actions/checkout@v2
-      - name: Identify configuration JSON files for DareBoost
+      - name: Identify configuration JSON files in ${{ inputs.directory }}
         id: step2
         working-directory: ${{ inputs.directory }}
         run: |
-          echo "::set-output name=files::$(ls -d */*.json | jq -R -s -c 'split("\n")[:-1]')"
+          echo "::set-output name=files::$(find . -name "*.json" | jq -R -s -c 'split("\n")[:-1]')"
