@@ -26,15 +26,20 @@ jobs:
       - name: Login to GitHub container registry
         run: docker login ghcr.io -u "${{ github.actor }}" -p ${{ secrets.password }}
       - name: Cache Docker image (as tar.gz)
+        id: cache
         uses: actions/cache@v2
         with:
           path: ~/cache
           key: heart
+      - name: Create cache folder if not already present
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          cd ~
+          mkdir cache
       - name: Pull Heart docker image
         run: |
           docker pull ghcr.io/fabernovel-fnguyen/heart:latest
       - name: Cache Heart Docker image as .tar file
         run: |
-          cd ~
-          mkdir cache
+          cd ~/cache
           docker save ${{ secrets.image-name }} | gzip > ~/cache/heart.tar.gz
