@@ -9,8 +9,7 @@ on:
         type: string
         default: ./ci/heart/config
     outputs:
-      # description: List of found configuration files in JSON format
-      value: ${{ jobs.step2.outputs.files }}
+      files: ${{ jobs.step2.outputs.files }}
 
 jobs:
   scan-conf-files:
