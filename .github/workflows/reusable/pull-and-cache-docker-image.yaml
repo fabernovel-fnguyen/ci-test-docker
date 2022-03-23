@@ -1,0 +1,30 @@
+name: Pull Heart Docker Image and Cache as tar.gz File
+
+on:
+  workflow_call:
+    inputs:
+      image-name:
+        required: true
+        type: string
+      username:
+        required: true
+        type: string
+      password:
+        required: true
+        type: string
+
+
+jobs:
+  pull-and-cache-heart-image:
+    steps:
+      - name: Login to GitHub container registry
+        run: docker login ghcr.io -u "${{ inputs.username }}" -p ${{ inputs.password }}
+      - name: Cache Docker image (as tar.gz)
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache
+          key: heart
+      - name: Pull Heart docker image
+        run: docker pull ${{ inputs.image-name }}
+      - name: Cache Heart Docker image as .tar file
+        run: docker save ${{ inputs.image-name }} | gzip > ~/.cache/${inputs.image-name}.tar.gz

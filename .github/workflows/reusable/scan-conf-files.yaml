@@ -1,0 +1,27 @@
+name: Scan for Configuration Files [Reusable workflow]
+
+on:
+  workflow_call:
+    inputs:
+      directory:
+        description: "Heart configuration directory"
+        required: true
+        type: string
+    outputs:
+      files:
+        description: "List of full paths to all found JSON configuration files in the provided configuration directory and its level 1 and level 2 subdirectories"
+        value: ${{ jobs.scan-conf-files.step2.outputs.files }}
+
+jobs:
+  scan-conf-files:
+    outputs: 
+      files: ${{ steps.config-files.outputs.files }}
+    steps:
+      - name: Checkout
+        id: step1
+        uses: actions/checkout@v2
+      - name: Identify configuration JSON files for DareBoost
+        id: step2
+        working-directory: ${{ inputs.directory }}
+        run: |
+          echo "::set-output name=files::$(ls -d */*.json | jq -R -s -c 'split("\n")[:-1]')"
