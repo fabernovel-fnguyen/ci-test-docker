@@ -28,10 +28,12 @@ jobs:
       - name: Cache Docker image (as tar.gz)
         uses: actions/cache@v2
         with:
-          path: ~/.cache
+          path: ~/cache
           key: heart
       - name: Pull Heart docker image
         run: |
           docker pull ghcr.io/fabernovel-fnguyen/heart:latest
       - name: Cache Heart Docker image as .tar file
-        run: docker save ${{ secrets.image-name }} | gzip > ~/.cache/heart.tar.gz
+        run: |
+          cd ~
+          docker save ${{ secrets.image-name }} | gzip > ~/cache/heart.tar.gz
