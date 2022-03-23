@@ -28,7 +28,7 @@ jobs:
       image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
       registry: ${{ secrets.CONTAINER_REGISTRY_NAME }}
       username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+      password: ${{ secrets.PAT_TOKEN }}
 
 
   analysis:
