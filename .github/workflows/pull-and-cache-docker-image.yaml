@@ -20,6 +20,8 @@ on:
 jobs:
   pull-and-cache-heart-image:
     runs-on: ubuntu-latest
+    permissions:
+      packages: read
     steps:
       - name: Login to GitHub container registry
         uses: docker/login-action@v1
