@@ -8,7 +8,7 @@ on:
         required: true
         type: string
     outputs:
-        description: "List of full paths to all found JSON configuration files in the provided configuration directory and its level 1 and level 2 subdirectories"
+        description: List of full paths to all found JSON configuration files in the provided configuration directory and its level 1 and level 2 subdirectories
         files: ${{ jobs.scan-conf-files.step2.outputs.files }}
 
 jobs:
