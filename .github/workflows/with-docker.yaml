@@ -4,21 +4,6 @@ on:
 
 jobs: 
 
-  pull-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Login to GitHub container registry
-        run: docker login ghcr.io -u "${{ github.actor }}" -p ${{ secrets.GITHUB_TOKEN }}
-      - name: Cache Docker image (as tar.gz)
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache
-          key: heart
-      - name: Pull Heart docker image
-        run: docker pull ghcr.io/fabernovel-fnguyen/heart:latest
-      - name: Cache Heart Docker image as .tar file
-        run: docker save ${{ secrets.image-name }} | gzip > ~/.cache/${inputs.image-name}.tar.gz
-
   scan:
     uses: ./.github/workflows/scan-conf-files.yaml
 
