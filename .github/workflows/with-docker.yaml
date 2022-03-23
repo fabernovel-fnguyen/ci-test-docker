@@ -10,7 +10,7 @@ jobs:
   scan-conf-files:
     uses: ./.github/workflows/scan-conf-files.yaml
     with:
-      directory: ${{ HEART_CONFIG_DIRECTORY }}
+      directory: ${{ env.HEART_CONFIG_DIRECTORY }}
 
   pull-and-cache-docker-image:
     uses: ./.github/workflows/pull-and-cache-docker-image.yaml    
