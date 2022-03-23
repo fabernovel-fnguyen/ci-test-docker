@@ -17,7 +17,7 @@ jobs:
   scan-conf-files:
     runs-on: ubuntu-latest
     outputs: 
-      files: ${{ steps.config-files.outputs.files }}
+      files: ${{ steps.step2.outputs.files }}
     steps:
       - name: Checkout
         id: step1
@@ -27,5 +27,3 @@ jobs:
         working-directory: ${{ inputs.directory }}
         run: |
           echo "::set-output name=files::$(find . -name "*.json" | jq -R -s -c 'split("\n")[:-1]')"
-        outputs:
-          files: ${{ steps.step2.outputs.files }}
