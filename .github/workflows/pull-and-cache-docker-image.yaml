@@ -3,10 +3,11 @@ name: Pull Heart Docker Image and Cache as tar.gz File
 on:
   workflow_call:
     inputs:
-      image-name:
+      username:
         required: true
         type: string
-      username:
+    secrets:
+      image-name:
         required: true
         type: string
       password:
