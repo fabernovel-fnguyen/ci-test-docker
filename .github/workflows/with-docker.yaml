@@ -16,7 +16,7 @@ jobs:
       password: ${{ secrets.PAT_TOKEN }}
 
 
-  analysis:
+  batch-analysis:
     runs-on: ubuntu-latest
     needs: [scan, pull-image]
 
@@ -30,7 +30,7 @@ jobs:
       - name: Cache Docker image (as tar.gz)
         uses: actions/cache@v2
         with:
-          path: ~/.cache
+          path: ~/cache
           key: heart
       - name: Load Heart image from cache
         run: docker load -i ~/cache/heart.tar.gz
