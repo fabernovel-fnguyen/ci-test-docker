@@ -16,6 +16,7 @@ on:
 
 jobs:
   pull-and-cache-heart-image:
+    runs-on: ubuntu-latest
     steps:
       - name: Login to GitHub container registry
         run: docker login ghcr.io -u "${{ inputs.username }}" -p ${{ inputs.password }}
