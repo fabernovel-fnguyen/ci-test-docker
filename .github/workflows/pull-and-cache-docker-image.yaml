@@ -12,6 +12,9 @@ on:
       password:
         required: true
         type: string
+      registry:
+        required: true
+        type: string
 
 
 jobs:
