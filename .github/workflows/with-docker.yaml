@@ -44,5 +44,5 @@ jobs:
       #   run: |
       - name: Run Heart analysis
         uses: ./github/workflows/heart-analysis.yaml
-        secrets:
+        with:
           image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
