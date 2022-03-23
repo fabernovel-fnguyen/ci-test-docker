@@ -11,7 +11,8 @@ jobs:
   pull-image:
     uses: ./.github/workflows/pull-and-cache-docker-image.yaml    
     with:
-      image-name: $secrets.HEART_DOCKER_IMAGE
+      image-name: $secrets.HEART_IMAGE_FULL_NAME
+      registry: $secrets.CONTAINER_REGISTRY_NAME
       username: $github.actor
       password: $secrets.GITHUB_TOKEN
 
