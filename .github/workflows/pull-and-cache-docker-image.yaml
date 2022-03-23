@@ -2,20 +2,19 @@ name: Pull Heart Docker Image and Cache as tar.gz File
 
 on:
   workflow_call:
-    inputs:
-      username:
-        required: true
-        type: string
     secrets:
+      username:
+        description: username to login to docker container registry
+        required: true
       image-name:
+        description: name of the docker image
         required: true
-        type: string
       password:
+        description:  password to login to docker container registry
         required: true
-        type: string
       registry:
+        description: address of container registry, ex. ghcr.io
         required: true
-        type: string
 
 
 jobs:
