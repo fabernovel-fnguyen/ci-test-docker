@@ -5,7 +5,7 @@ on:
     inputs:
       directory:
         description: "Heart configuration directory"
-        required: true
+        required: false
         type: string
         default: ./ci/heart/config
     # outputs:
