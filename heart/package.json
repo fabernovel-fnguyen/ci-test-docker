@@ -1,0 +1,34 @@
+{
+  "name": "heart",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@fabernovel/heart-api": "^3.1.0",
+    "@fabernovel/heart-cli": "^3.1.1",
+    "@fabernovel/heart-dareboost": "^3.2.1",
+    "@fabernovel/heart-lighthouse": "^3.0.1",
+    "@fabernovel/heart-observatory": "^3.2.1",
+    "@fabernovel/heart-bigquery": "^3.2.0",
+    "@fabernovel/heart-slack": "^3.2.1",
+    "@fabernovel/heart-ssllabs-server": "^3.2.1"
+  },
+  "scripts": {
+    "use-api": "yarn add @fabernovel/heart-api",
+    "use-cli": "yarn add @fabernovel/heart-cli",
+    "use-dareboost": "yarn add @fabernovel/heart-dareboost",
+    "use-slack": "yarn add @fabernovel/heart-slack",
+    "use-lighthouse": "yarn add @fabernovel/heart-lighthouse",
+    "use-ssllabs": "yarn add @fabernovel/heart-ssllabs-server",
+    "use-observatory": "yarn add @fabernovel/heart-observatory",
+    "use-bigquery": "yarn add @fabernovel/heart-bigquery",
+    "rm-api": "yarn remove @fabernovel/heart-api",
+    "rm-cli": "yarn remove @fabernovel/heart-cli",
+    "rm-dareboost": "yarn remove @fabernovel/heart-dareboost",
+    "rm-slack": "yarn remove @fabernovel/heart-slack",
+    "rm-lighthouse": "yarn remove @fabernovel/heart-lighthouse",
+    "rm-ssllabs": "yarn remove @fabernovel/heart-ssllabs-server",
+    "rm-observatory": "yarn remove @fabernovel/heart-observatory",
+    "rm-bigquery": "yarn remove @fabernovel/heart-observatory"
+  }
+}

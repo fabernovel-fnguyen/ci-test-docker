@@ -11,7 +11,7 @@ on:
     outputs:
       files: 
         description: "List of found configuration files in JSON format"
-        value: ${{ jobs.scan-conf-files.steps.step2.outputs.files }}
+        value: ${{ jobs.scan-conf-files.outputs.files }}
 
 jobs:
   scan-conf-files:

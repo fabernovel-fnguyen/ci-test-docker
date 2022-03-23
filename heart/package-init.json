@@ -1,0 +1,15 @@
+{
+  "name": "heart",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "use-api": "yarn add @fabernovel/heart-api",
+    "use-cli": "yarn add @fabernovel/heart-cli",
+    "use-dareboost": "yarn add @fabernovel/heart-dareboost",
+    "use-slack": "yarn add @fabernovel/heart-slack",
+    "use-lighthouse": "yarn add @fabernovel/heart-lighthouse",
+    "use-ssllabs": "yarn add @fabernovel/heart-ssllabs-server",
+    "use-observatory": "yarn add @fabernovel/heart-observatory"
+  }
+}
