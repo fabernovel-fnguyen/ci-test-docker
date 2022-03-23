@@ -2,6 +2,9 @@ name: Run Heart analysis using Heart Docker image
 on:
   push
 
+env:
+  secrets: ${{ secrets }}
+  
 jobs: 
   scan:
     uses: ./.github/workflows/scan-conf-files.yaml
