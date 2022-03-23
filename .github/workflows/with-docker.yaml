@@ -22,7 +22,7 @@ jobs:
 
     strategy:
       matrix:
-        conf-file-name: ${{ fromJson(needs.scan.outputs.files) }}
+        conf-file-name: ${{ fromJson(needs.scan.outputs.files.value) }}
     
     steps:
       - name: Check out the repo
