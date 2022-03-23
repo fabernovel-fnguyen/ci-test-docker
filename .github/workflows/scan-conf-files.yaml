@@ -8,7 +8,7 @@ on:
         required: true
         type: string
     outputs:
-        files: ${{ jobs.scan-conf-files.step2.outputs.files }}
+      files: ${{ jobs.scan-conf-files.step2.outputs.files }}
 
 jobs:
   scan-conf-files:
