@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to GitHub container registry
-        run: docker login ghcr.io -u "${{ inputs.username }}" -p ${{ inputs.password }}
+        run: echo ${{ inputs.password }} | docker login ghcr.io -u "${{ inputs.username }}" --password-stdin
       - name: Cache Docker image (as tar.gz)
         uses: actions/cache@v2
         with:
