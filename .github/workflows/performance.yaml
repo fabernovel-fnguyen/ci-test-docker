@@ -1,9 +1,9 @@
-name: Run Heart analysis using Heart Docker image
+name: Run Performance Analysis
 on:
   push
 
 jobs: 
-  scan-lighthouse:
+  scan:
     uses: ./.github/workflows/scan-conf-files.yaml
     with:
       directory: "./ci/heart/config" # optional
