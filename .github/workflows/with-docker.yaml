@@ -7,17 +7,27 @@ env:
   HEART_CONFIG_DIRECTORY: ./ci/heart/config
 
 jobs: 
-  scan-conf-files:
-    uses: ./.github/workflows/scan-conf-files.yaml
-    with:
-      directory: ${{ env.HEART_CONFIG_DIRECTORY }}
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve required .env parameters
+        id: step1
+        run: |
+          echo "::set-output name=HEART_CONFIG_DIRECTORY::$(echo $HEART_CONFIG_DIRECTORY)"
+        outputs:
+          HEART_CONFIG_DIRECTORY: ${{ jobs.job1.steps.step1.outputs.HEART_CONFIG_DIRECTORY }}
+      - 
+        uses: ./.github/workflows/scan-conf-files.yaml
+        with:
+          directory: ${{ steps.step1.outputs.HEART_CONFIG_DIRECTORY }}
 
-  pull-and-cache-docker-image:
-    uses: ./.github/workflows/pull-and-cache-docker-image.yaml    
-    with:
-      image-name: $HEART_DOCKER_IMAGE
-      username: $github.actor
-      password: $secrets.GITHUB_TOKEN
+  # job2:
+  #   id: job2
+  #   uses: ./.github/workflows/pull-and-cache-docker-image.yaml    
+  #   with:
+  #     image-name: $HEART_DOCKER_IMAGE
+  #     username: $github.actor
+  #     password: $secrets.GITHUB_TOKEN
 
 
   # analysis:
