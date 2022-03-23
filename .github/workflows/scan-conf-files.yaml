@@ -9,7 +9,7 @@ on:
         type: string
         default: ./ci/heart/config
     outputs:
-      files: ${{ jobs.steps.step2.outputs.files }}
+      files: ${{ steps.step2.outputs.files }}
 
 jobs:
   scan-conf-files:
