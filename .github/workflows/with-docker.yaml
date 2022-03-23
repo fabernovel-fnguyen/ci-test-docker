@@ -9,13 +9,13 @@ env:
 jobs: 
   scan-conf-files:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/reusable/scan-conf-files.yaml
+    uses: ./.github/workflows/scan-conf-files.yaml
     with:
       directory: ${{ HEART_CONFIG_DIRECTORY }}
 
   pull-and-cache-docker-image:
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/reusable/pull-and-cache-docker-image.yaml    
+    uses: ./.github/workflows/pull-and-cache-docker-image.yaml    
     with:
       image-name: $HEART_DOCKER_IMAGE
       username: $github.actor
