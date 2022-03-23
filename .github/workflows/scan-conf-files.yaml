@@ -10,7 +10,7 @@ on:
         default: ./ci/heart/config
     outputs:
       files: 
-        descriptipon: "List of found configuration files in JSON format"
+        description: "List of found configuration files in JSON format"
         value: ${{ jobs.scan-conf-files.steps.step2.outputs.files }}
 
 jobs:
