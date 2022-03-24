@@ -45,4 +45,4 @@ jobs:
           echo "MODULE_NAME=$var" >> $GITHUB_ENV
       - name: Run Heart analysis
         if: ${{ env.MODULE_NAME == 'lighthouse' }}
-        run: docker run --rm -i ${{ env.HEART_DEFAULT_OPTIONS }} ${{ secrets.HEART_IMAGE_FULL_NAME }} ${{ env.MODULE_NAME }} "https://heart.fabernovel.com"
+        run: docker run --rm -i ${{ env.HEART_DEFAULT_OPTIONS }} ${{ secrets.HEART_IMAGE_FULL_NAME }} ${{ env.MODULE_NAME }} --inline "https://heart.fabernovel.com"
