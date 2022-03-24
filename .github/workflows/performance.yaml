@@ -44,15 +44,17 @@ jobs:
       - name: Check .env variable for module name
         run: |
           echo "${{ env.MODULE_NAME }}"
-      - name: Run Heart analysis
-        if: ${{ env.MODULE_NAME == 'lighthouse' }}
-        run: docker run --rm -i ${{ inputs.image-name }} ${{ env.MODULE_NAME }} "https://heart.fabernovel.com"
-        # uses: ./.github/workflows/heart-analysis.yaml
+      # - name: Run Heart analysis
+      #   if: ${{ env.MODULE_NAME == 'lighthouse' }}
+      #   run: docker run --rm -i ${{ secrets.HEART_IMAGE_FULL_NAME }} ${{ env.MODULE_NAME }} "https://heart.fabernovel.com"
+      - 
+        uses: ./.github/actions/heart-analysis.yaml
+        with:
+          image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
+          module-name: ${{ env.MODULE_NAME }}
+          options: "https://heart.fabernovel.com"
+      # uses: ./.github/workflows/heart-analysis.yaml
         # with:
         #   image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
         #   module-name: lighthouse # ${{ env.MODULE_NAME }}
         #   options: "https://heart.fabernovel.com"
-
-  analysis:
-    needs: [scan, pull-image]
-    uses: ./.github/workflows/heart-analysis.yaml

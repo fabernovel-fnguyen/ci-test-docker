@@ -1,0 +1,24 @@
+name: Run Heart Analysis
+on:
+  workflow_call:
+    inputs:
+      image-name:
+        required: true
+        type: string
+      options:
+        required: false
+        type: string
+      module-name:
+        required: false
+        type: string
+      used-modules:
+        required: true
+        type: string
+        default: -e USE_LIGHTHOUSE=true -e USE_SLACK=true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run Heart through Docker container
+      run: docker run --rm -i ${{ inputs.used-modules }} ${{ inputs.image-name }} ${{ inputs.module-name }} ${{ inputs.options }}
+      shell: bash
