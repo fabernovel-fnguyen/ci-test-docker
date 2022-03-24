@@ -20,4 +20,3 @@ runs:
   steps:
     - name: Run Heart through Docker container
       run: docker run --rm -i ${{ inputs.used-modules }} ${{ inputs.image-name }} ${{ inputs.module-name }} ${{ inputs.options }}
-      shell: bash

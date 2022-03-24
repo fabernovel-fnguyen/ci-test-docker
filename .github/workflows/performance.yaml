@@ -51,7 +51,7 @@ jobs:
         run: |
           ls -la .github/actions/heart-analysis
       - 
-        uses: .github/actions/heart-analysis
+        uses: .github/actions/heart-analysis/action.yaml
         with:
           image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
           module-name: ${{ env.MODULE_NAME }}
