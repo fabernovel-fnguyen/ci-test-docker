@@ -50,12 +50,9 @@ jobs:
       - name: Checkout GitHub actions
         uses: actions/checkout@v2
         with:
-          # repository: .
-          ref: main
-          token: ${{ secrets.PAT_TOKEN }}
           path: ./.github/actions/heart-analysis
       - 
-        uses: ./.github/actions/heart-analysis.yaml
+        uses: ./.github/actions/heart-analysis
         with:
           image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
           module-name: ${{ env.MODULE_NAME }}
