@@ -41,9 +41,11 @@ jobs:
           cd ~
           mkdir ${{ inputs.cache-directory }}
       - name: Pull Heart docker image
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           docker pull ${{ secrets.image-name }}
       - name: Cache Heart Docker image as .tar file
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd ~${{ inputs.cache-directory }}
           docker save ${{ secrets.image-name }} | gzip > ~${{ inputs.cache-directory }}/heart.tar.gz
