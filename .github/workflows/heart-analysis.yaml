@@ -1,5 +1,4 @@
 name: Run Heart Analysis
-
 on:
   workflow_call:
     inputs:
@@ -17,6 +16,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - name: Run Heart through docker container
-        id: run-heart
+      - name: Checkout
+        id: step1
+        uses: actions/checkout@v2
+      - name: Run Heart through Docker container
         run: docker run --rm -i ${{ inputs.image-name }} ${{ inputs.image-name }}
