@@ -1,4 +1,4 @@
-name: Run Performance Analysis
+name: Run Standard Performance Analysis
 on:
   push
 
@@ -11,7 +11,7 @@ jobs:
     with:
       directory: "./ci/heart/config"
 
-  pull-image:
+  pull-cache-image:
     uses: ./.github/workflows/pull-and-cache-docker-image.yaml
     with:
       cache-directory: /cache    
@@ -23,7 +23,7 @@ jobs:
 
   batch-analysis:
     runs-on: ubuntu-latest
-    needs: [scan, pull-image]
+    needs: [scan, pull-cache-image]
 
     strategy:
       matrix:
@@ -45,4 +45,4 @@ jobs:
           echo "MODULE_NAME=$var" >> $GITHUB_ENV
       - name: Run Heart analysis
         if: ${{ env.MODULE_NAME == 'lighthouse' }}
-        run: docker run --rm -i ${{ env.HEART_DEFAULT_OPTIONS }} ${{ secrets.HEART_IMAGE_FULL_NAME }} ${{ env.MODULE_NAME }} --inline "{"url":"https://heart.fabernovel.com"}"
+        run: docker run --rm -i ${{ env.HEART_DEFAULT_OPTIONS }} ${{ secrets.HEART_IMAGE_FULL_NAME }} ${{ env.MODULE_NAME }} --inline '{"url":"https://heart.fabernovel.com"}'
