@@ -9,17 +9,23 @@ docker login ghcr.io -u <your-github-username> -p <your-github-personal-access-t
 ## 2 - Locally build Heart's docker image
 
 ```bash
-docker-compose build # see Dockerfile and docker-compose.yaml
+# see Dockerfile and docker-compose.yaml
+docker-compose build
 ```
 
 ## 3 - Run a local instance of image
 ```bash
-docker run --rm -i ghcr.io/fabernovel-fnguyen/heart:latest <your-heart-options>
+# You must specify the Heart modules to be used for a given analysis. Only Heart-CLI will be used in all cases.
+docker run 
+    --rm -i ghcr.io/fabernovel-fnguyen/heart:latest
+    -e USE_DAREBOOST=true
+    -e USE_SLACK=true
+    <your-heart-options> # ex: --inline '{"url":"https://about.gitlab.com/"}'
 ```
 
 ## 4 - Pushing a new image / an update for an existing image
 
 ```bash
-docker push <your-image-name>
 # example: docker push ghcr.io/fabernovel-fnguyen/heart:latest
+docker push <your-image-name>
 ```

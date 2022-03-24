@@ -2,10 +2,10 @@
 
 # HEART RUNNER MODULES
 
-if [ -v $USE_CLI ];
-    then yarn run rm-cli
-    else echo "Heart CLI module will be used..."
-fi
+# if [ -v $USE_CLI ];
+#     then yarn run rm-cli
+#     else echo "Heart CLI module will be used..."
+# fi
 
 if [ -v $USE_API ];
     then yarn run rm-api
