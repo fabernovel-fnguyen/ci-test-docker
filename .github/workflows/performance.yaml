@@ -44,9 +44,9 @@ jobs:
       - name: Check .env variable for module name
         run: |
           echo "${{ env.MODULE_NAME }}"
-      # - name: Retrieve module name from configuration file full path
-      #   run: |
-      # - name: Run Heart analysis
-      #   uses: ./.github/workflows/heart-analysis.yaml
-      #   with:
-      #     image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
+      - name: Run Heart analysis
+        uses: ./.github/workflows/heart-analysis.yaml
+        with:
+          image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
+          module-name: ${{ env.MODULE_NAME }}
+          options: "https://heart.fabernovel.com"

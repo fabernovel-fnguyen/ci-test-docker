@@ -6,6 +6,12 @@ on:
       image-name:
         required: true
         type: string
+      module-name:
+        required: false
+        type: string
+      options:
+        required: false
+        type: string
 
 jobs:
   run:
@@ -13,4 +19,4 @@ jobs:
     steps:
       - name: Run Heart through docker container
         id: run-heart
-        run: docker run --rm -i ${{ secrets.image-name }} --help
+        run: docker run --rm -i ${{ inputs.image-name }} ${{ inputs.image-name }}
