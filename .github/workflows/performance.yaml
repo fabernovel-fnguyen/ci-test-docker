@@ -18,7 +18,6 @@ jobs:
       username: ${{ github.actor }}
       password: ${{ secrets.PAT_TOKEN }}
 
-
   batch-analysis:
     runs-on: ubuntu-latest
     needs: [scan, pull-image]
@@ -50,12 +49,12 @@ jobs:
       - 
         run: |
           ls -la .github/actions/heart-analysis
-      - 
-        uses: .github/actions/heart-analysis/action.yaml
-        with:
-          image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
-          module-name: ${{ env.MODULE_NAME }}
-          options: "https://heart.fabernovel.com"
+      # - 
+      #   uses: .github/actions/heart-analysis/action.yaml
+      #   with:
+      #     image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
+      #     module-name: ${{ env.MODULE_NAME }}
+      #     options: "https://heart.fabernovel.com"
       # uses: ./.github/workflows/heart-analysis.yaml
         # with:
         #   image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
