@@ -47,15 +47,11 @@ jobs:
       # - name: Run Heart analysis
       #   if: ${{ env.MODULE_NAME == 'lighthouse' }}
       #   run: docker run --rm -i ${{ secrets.HEART_IMAGE_FULL_NAME }} ${{ env.MODULE_NAME }} "https://heart.fabernovel.com"
-      - name: Checkout single GitHub action
-        uses: actions/checkout@v2
-        with:
-          path: ./.github/actions/heart-analysis
       - 
         run: |
           ls -la .github/actions/heart-analysis
       - 
-        uses: ./heart-analysis.yaml
+        uses: .github/actions/heart-analysis
         with:
           image-name: ${{ secrets.HEART_IMAGE_FULL_NAME }}
           module-name: ${{ env.MODULE_NAME }}
