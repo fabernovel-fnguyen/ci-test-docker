@@ -1,23 +1,24 @@
 name: Run Heart Analysis
 on:
   workflow_call:
-    inputs:
-      image-name:
-        required: true
-        type: string
+    # inputs:
+    #   image-name:
+    #     required: true
+    #     type: string
+    #   options:
+    #     required: false
+    #     type: string
       # module-name:
       #   required: false
       #   type: string
-      options:
-        required: false
-        type: string
 
 jobs:
-  run:
+  step1:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        id: step1
         uses: actions/checkout@v2
-      - name: Run Heart through Docker container
-        run: docker run --rm -i ${{ inputs.image-name }} ${{ inputs.image-name }}
+      - name: Print some text
+        run: echo "Hello World!"
+      # - name: Run Heart through Docker container
+      #   run: docker run --rm -i ${{ inputs.image-name }} ${{ inputs.image-name }}
