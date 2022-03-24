@@ -52,11 +52,8 @@ jobs:
         with:
           path: ./.github/actions/heart-analysis
       - 
-        run: ls -la
-      - 
         run: |
-          cd .github/actions/heart-analysis
-          ls -la
+          ls -la .github/actions/heart-analysis
       - 
         uses: ./heart-analysis.yaml
         with:
