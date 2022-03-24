@@ -1,21 +1,20 @@
 name: Run Heart Analysis
-on:
-  workflow_call:
-    inputs:
-      image-name:
-        required: true
-        type: string
-      options:
-        required: false
-        type: string
-      module-name:
-        required: false
-        type: string
-      used-modules:
-        required: true
-        type: string
-        default: -e USE_LIGHTHOUSE=true -e USE_SLACK=true
-
+description: Run a Heart analysis through a Docker container
+inputs:
+  image-name:
+    required: true
+    type: string
+  options:
+    required: false
+    type: string
+  module-name:
+    required: false
+    type: string
+  used-modules:
+    required: true
+    type: string
+    default: -e USE_LIGHTHOUSE=true -e USE_SLACK=true
+outputs:
 runs:
   using: "composite"
   steps:
