@@ -6,35 +6,33 @@ on:
       cache-directory:
         required: true
         type: string
+      registry:
+        required: true
+        type: string
+      image-name:
+        required: true
+        type: string
     secrets:
       username:
         description: username to login to docker container registry
         required: true
-      image-name:
-        description: name of the docker image
-        required: true
       password:
         description:  password to login to docker container registry
-        required: true
-      registry:
-        description: address of container registry, ex. ghcr.io
         required: true
 
 
 jobs:
   pull-and-cache-heart-image:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.password }}
     steps:
       - name: Login to GitHub container registry
-        run: docker login ghcr.io -u "${{ github.actor }}" -p ${{ secrets.password }}
+        run: docker login ghcr.io -u "${{ secrets.username }}" -p ${{ secrets.password }}
       - name: Cache Docker image (as tar.gz)
         id: cache
         uses: actions/cache@v2
         with:
           path: ~${{ inputs.cache-directory }}
-          key: heart
+          key: ${{ inputs.image-name }}
       - name: Create cache folder if not already present
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
@@ -43,9 +41,9 @@ jobs:
       - name: Pull Heart docker image
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          docker pull ${{ secrets.image-name }}
+          docker pull ${{ inputs.image-name }}
       - name: Cache Heart Docker image as .tar file
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd ~${{ inputs.cache-directory }}
-          docker save ${{ secrets.image-name }} | gzip > ~${{ inputs.cache-directory }}/heart.tar.gz
+          docker save ${{ secrets.image-name }} | gzip > ~${{ inputs.cache-directory }}/${{ inputs.image-name }}.tar.gz

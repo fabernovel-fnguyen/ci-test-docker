@@ -1,1 +1,66 @@
 name: Run a standard Heart analysis
+on:
+  workflow_call:
+    inputs:
+      files:
+        required: true
+        type: string
+      # module-options:
+      #   required: false
+      #   type: string
+      #   default: -e USE_DAREBOOST=true -e USE_SLACK=true
+      # heart-options:
+      #   required: false
+      #   type: string
+      #   default: --help
+      config-directory:
+        required: false
+        type: string
+        default: ./ci/heart/config
+      image-name:
+        required: true
+        type: string
+    secrets:
+      slack-api-token:
+        description: Slack API Token
+        required: true
+      dareboost-api-token:
+        description: Dareboost API Token
+        required: true
+      slack-channel-id:
+        description: Slack Channel ID (e.g. my-project)
+        required: true
+
+
+jobs:
+  start-jobs:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        conf-file-name: ${{ fromJson(inputs.files) }}
+    
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Cache Docker image (as tar.gz)
+        uses: actions/cache@v2
+        with:
+          path: ~/cache
+          key: heart
+      - name: Load Heart image from cache
+        run: docker load -i ~/cache/${{  }}.tar.gz
+      # - name: Retrieve module name from configuration file path
+      #   run: |
+      #     var=$(echo "${{ matrix.conf-file-name }}" | cut -d '/' -f2)
+      #     echo "module=$var" >> $GITHUB_ENV
+      - name: Run Heart analysis
+        if: ${{ env.module == 'dareboost' }}
+        run: |
+          docker run --rm -i \
+            -e DAREBOOST_API_TOKEN=${{ secrets.dareboost-api-token }} \
+            -e SLACK_API_TOKEN=${{ secrets.slack-api-token }} \
+            -e SLACK_CHANNEL_ID=${{ inputs.slack-channel-id }} \
+            ${{ inputs.image-name }} \
+            dareboost \
+            --file '${{inputs.config-directory}}/${{ matrix.conf-file-name }}'
