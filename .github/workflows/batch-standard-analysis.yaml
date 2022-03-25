@@ -68,4 +68,4 @@ jobs:
           dareboost
           --file '${{inputs.config-directory}}/${{ matrix.conf-file-name }}'
           ;} 2>$1 )
-          && if [[ "$OUTPUT" != *""* ]];then echo $OUTPUT && exit 1; fi
+      - run: echo $OUTPUT
