@@ -62,5 +62,6 @@ jobs:
           -e SLACK_API_TOKEN=${{ secrets.slack-api-token }}
           -e SLACK_CHANNEL_ID=${{ inputs.slack-channel-id }}
           -v $(pwd)/${{ inputs.config-directory }}:/usr/heart/${{ inputs.config-directory }}
+          ${{ inputs.image-name }}
           dareboost
           --file '${{inputs.config-directory}}/${{ matrix.conf-file-name }}'
