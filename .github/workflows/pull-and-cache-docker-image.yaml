@@ -33,11 +33,11 @@ jobs:
         with:
           path: ~${{ inputs.cache-directory }}
           key: ${{ inputs.image-name }}
-      - name: Create cache folder if not already present
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          cd ~
-          mkdir ${{ inputs.cache-directory }}
+      # - name: Create cache folder if not already present
+      #   if: steps.cache.outputs.cache-hit != 'true'
+      #   run: |
+      #     cd ~
+      #     mkdir ${{ inputs.cache-directory }}
       - name: Pull Heart docker image
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
