@@ -58,6 +58,7 @@ jobs:
       - name: Run Heart analysis
         if: ${{ env.module == 'dareboost' }}
         run: >
+          OUTPUT=$( {
           docker run --rm -i
           -e DAREBOOST_API_TOKEN=${{ secrets.dareboost-api-token }}
           -e SLACK_API_TOKEN=${{ secrets.slack-api-token }}
@@ -66,3 +67,5 @@ jobs:
           ${{ inputs.image-name }}
           dareboost
           --file '${{inputs.config-directory}}/${{ matrix.conf-file-name }}'
+          ;} 2>$1 )
+          && if [[ "$OUTPUT" != *""* ]];then echo $OUTPUT && exit 1; fi
