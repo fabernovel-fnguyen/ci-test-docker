@@ -45,5 +45,5 @@ jobs:
       - name: Cache Heart Docker image as .tar file
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          cd ~${{ inputs.cache-directory }}
+          cd ~/${{ inputs.cache-directory }}
           docker save ${{ secrets.image-name }} | gzip > ~/${{ inputs.cache-directory }}/${{ inputs.image-name }}.tar.gz
