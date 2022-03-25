@@ -46,4 +46,4 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd ~/${{ inputs.cache-directory }}
-          docker save ${{ secrets.image-name }} | gzip > ~/${{ inputs.cache-directory }}/${{ inputs.image-name }}.tar.gz
+          docker save ${{ inputs.image-name }} | gzip > ~/${{ inputs.cache-directory }}/${{ inputs.image-name }}.tar.gz
