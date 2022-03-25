@@ -47,7 +47,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/cache
-          key: heart
+          key: ${{ inputs.image-name }}
+      - run: ls -la ~/cache
       - name: Load Heart image from cache
         run: docker load -i ~/cache/heart-image.tar.gz
       # - name: Retrieve module name from configuration file path

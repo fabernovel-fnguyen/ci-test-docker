@@ -47,3 +47,8 @@ jobs:
         run: |
           cd ~/${{ inputs.cache-directory }}
           docker save ${{ inputs.image-name }} | gzip > ~/${{ inputs.cache-directory }}/heart-image.tar.gz
+      # - name: Upload cache
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: cache
+      #     path: ~/${{ inputs.cache-directory }}
