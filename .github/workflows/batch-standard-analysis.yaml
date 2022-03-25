@@ -57,11 +57,11 @@ jobs:
           echo "module=$var" >> $GITHUB_ENV
       - name: Run Heart analysis
         if: ${{ env.module == 'dareboost' }}
-        run: |
-          docker run --rm -i \
-            -e DAREBOOST_API_TOKEN=${{ secrets.dareboost-api-token }} \
-            -e SLACK_API_TOKEN=${{ secrets.slack-api-token }} \
-            -e SLACK_CHANNEL_ID=${{ inputs.slack-channel-id }} \
-            ${{ inputs.image-name }} \
-            dareboost \
-            --file '${{inputs.config-directory}}/${{ matrix.conf-file-name }}'
+        run: >
+          docker run --rm -i
+          -e DAREBOOST_API_TOKEN=${{ secrets.dareboost-api-token }}
+          -e SLACK_API_TOKEN=${{ secrets.slack-api-token }}
+          -e SLACK_CHANNEL_ID=${{ inputs.slack-channel-id }}
+          ${{ inputs.image-name }}
+          dareboost
+          --file '${{inputs.config-directory}}/${{ matrix.conf-file-name }}'
