@@ -24,7 +24,7 @@ jobs:
   heart-standard:
     needs: [scan, pull-cache-image]
     
-    uses: ./github/workflows/batch-standard-analysis.yaml
+    uses: ./.github/workflows/batch-standard-analysis.yaml
     with:
       files: ${{ needs.scan.outputs.files }}
       image-name: ghcr.io/fabernovel-fnguyen/heart-standard:latest
