@@ -2,12 +2,9 @@ version: "3.8"
 
 services:
   heart-image:
-    image: ghcr.io/fabernovel-fnguyen/heart:latest
+    image: ghcr.io/fabernovel-fnguyen/heart-standard:latest
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        OBSERVATORY_API_URL: https://http-observatory.security.mozilla.org/api/v1/
-        OBSERVATORY_ANALYZE_URL: https://observatory.mozilla.org/analyze/
     ports:
       - 3000:3000

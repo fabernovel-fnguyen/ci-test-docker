@@ -31,7 +31,6 @@ on:
         description: Slack Channel ID (e.g. my-project)
         required: true
 
-
 jobs:
   start-jobs:
     runs-on: ubuntu-latest
@@ -62,6 +61,6 @@ jobs:
           -e DAREBOOST_API_TOKEN=${{ secrets.dareboost-api-token }}
           -e SLACK_API_TOKEN=${{ secrets.slack-api-token }}
           -e SLACK_CHANNEL_ID=${{ inputs.slack-channel-id }}
-          ${{ inputs.image-name }}
+          -v $(pwd)/${{ inputs.image-name }}:/usr/heart/${{ inputs.image-name }}
           dareboost
           --file '${{inputs.config-directory}}/${{ matrix.conf-file-name }}'
