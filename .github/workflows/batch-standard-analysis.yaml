@@ -67,6 +67,6 @@ jobs:
           ${{ inputs.image-name }}
           dareboost
           --file '${{inputs.config-directory}}/${{ matrix.conf-file-name }}'
-      - run: Check failures
+      - name: Check failures
         if: steps.step5.outcome != 'success'
         run: exit 1 
